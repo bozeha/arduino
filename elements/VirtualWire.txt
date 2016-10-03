@@ -1,0 +1,37 @@
+Basic Usage
+
+VirtualWire works somewhat differently than most Arduino libraries. Many individual functions are used, and their names are somewhat different. Fortunately, each one is simple.
+Configuration Functions
+
+vw_set_tx_pin(transmit_pin)
+Configure the transmit pin. Default is pin 12. Blah
+vw_set_rx_pin(receive_pin)
+Configure the receive pin, Default is pin 11. On Teensy 2.0, pin 11 should not be used because most receiver modules can not work correctly with the orange LED on that pin.
+vw_set_ptt_pin(transmit_en_pin)
+Configure the transmit enable pin, or "push to talk". Default is pin 10.
+vw_set_ptt_inverted(true)
+Configure the "push to talk" polarity.
+vw_setup(2000)
+Begin using all settings and initialize the library. This is similar to the "begin" function of other libraries. All pins should be configured before calling this function.
+Transmission Functions
+
+vw_send(message, length)
+Transmit a message. "message" is an array of the bytes to send, and "length" is the number of bytes stored in the array. This function returns immediately and the message is sent slowly by an interrupt-based background process.
+vw_tx_active()
+Returns true if the message is being sent, or false if the transmitter is not active. You can use this after sending a message to test when it has finished being transmitted.
+vw_wait_tx()
+Wait for a message to be fully transmitted. Often the simplest approach is to call this after vw_send.
+Reception Functions
+
+vw_rx_start()
+Activate the receiver process. You must call this function before any reception can occur. An interrupt-based background process is started which monitors the reception of data.
+vw_have_message()
+Returns true if message has been received. This is similar to the "available" function of most other libraries.
+vw_wait_rx()
+Wait for a message to be received. This will only return when a message has been received, otherwise it will wait forever.
+vw_wait_rx_max(timeout_ms)
+Wait for a message, but give up after "timeout_ms". Returns true if a message was received, or false if the timeout period elapsed.
+vw_get_message(buf, &buflen))
+Read the last received message. This should be called only when a message is known to be received with any of the 3 functions above. "buf" is an array where the message is copied. "buflen" should have the array's maximum size upon input, and upon return the number of bytes actually copied is retured. The function itself returns true if the message was verified correct, or false if a message was received but appears to have been corrupted.
+vw_rx_stop()
+Disable the receiver process.
