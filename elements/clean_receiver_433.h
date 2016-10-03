@@ -1,31 +1,37 @@
 #include <VirtualWire.h>
 
-const int led_pin = 11;
-const int transmit_pin = 12;
-const int receive_pin = 2;
-const int transmit_en_pin = 3;  
+//const int led_pin = 6;
+//const int transmit_pin = 12;
+const int receive_pin = 11;
+//const int transmit_en_pin = 3;
 
 void setup()
 {
-  // Initialise the IO and ISR
-  vw_set_tx_pin(transmit_pin);
-  vw_set_rx_pin(receive_pin);
-  vw_set_ptt_pin(transmit_en_pin);
-  vw_set_ptt_inverted(true); // Required for DR3100
-  vw_setup(2000);   // Bits per sec
-}
+  delay(1000);
+  Serial.begin(9600); // Debugging only
+  Serial.println("start");
 
-byte count = 1;
+  vw_set_rx_pin(receive_pin);
+  vw_set_ptt_inverted(true); // Required for DR3100
+  vw_setup(2000);            // Bits per sec
+  vw_rx_start();             // Start the receiver PLL running
+}
 
 void loop()
 {
-  char msg[7] = {'h','e','l','l','o',' ','#'};
+  uint8_t buf[VW_MAX_MESSAGE_LEN];     // build array with the bumber of elements VW_MAX_MESSAGE_LEN max number of bits that we can be received
+  uint8_t buflen = VW_MAX_MESSAGE_LEN; //build var with size of VW_MAX_MESSAGE_LEN -> max number of bits that we can be received
 
-  msg[6] = count;
-  digitalWrite(led_pin, HIGH); // Flash a light to show transmitting
-  vw_send((uint8_t *)msg, 7);
-  vw_wait_tx(); // Wait until the whole message is gone
-  digitalWrite(led_pin, LOW);
-  delay(1000);
-  count = count + 1;
+  if (vw_get_message(buf, &buflen)) // enter the massage we receive to the array
+  {
+    int i;
+
+    for (i = 0; i < buflen; i++)
+    {
+
+      Serial.print(buf[i], HEX);// print buf array in place i , and code as hex code
+      Serial.print(' ');
+    }
+    Serial.println(); // start new line
+  }
 }
