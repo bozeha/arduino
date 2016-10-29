@@ -36,7 +36,7 @@ void loop()
   
   for (i = 0; i < buflen; i++)
   {
-      Serial.print(buf[i], HEX);
+      Serial.print(buf[i]);
       Serial.print(' ');
   }
   Serial.println();

@@ -29,7 +29,7 @@ void loop()
     for (i = 0; i < buflen; i++)
     {
 
-      Serial.print(buf[i], HEX);// print buf array in place i , and code as hex code
+      Serial.print(buf[i]);// print buf array in place i , and code as hex code
       Serial.print(' ');
     }
     Serial.println(); // start new line

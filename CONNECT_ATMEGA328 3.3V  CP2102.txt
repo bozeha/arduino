@@ -1,0 +1,6 @@
+Pro Mini    CP2102 
+DTR     <-    DTR  
+TXO     ->    RXD  
+RXI      <-    TXID 
+VCC     <-    5V    
+GND    <-    GND 
