@@ -87,7 +87,7 @@ void loop()//start loop
          {
           Serial.println("6666666666");
              pins_array[3] = (pins_array[3] == 0) ? 1 : 0;
-             EEPROM.write(2, pins_array[2]);
+             EEPROM.write(3, pins_array[3]);
              replaceRelay(9,pins_array[3]);
              
          }
@@ -95,7 +95,7 @@ void loop()//start loop
          {
           Serial.println("777777777");
              pins_array[4] = (pins_array[4] == 0) ? 1 : 0;
-             EEPROM.write(2, pins_array[2]);
+             EEPROM.write(4, pins_array[4]);
              replaceRelay(10,pins_array[4]);
              
              
@@ -103,21 +103,21 @@ void loop()//start loop
           if (buttonNum4 == LOW) //if we press on button 1
          {
              pins_array[5] = (pins_array[5] == 0) ? 1 : 0;
-             EEPROM.write(2, pins_array[2]);
+             EEPROM.write(5, pins_array[5]);
              replaceRelay(11,pins_array[5]);
              
          }
           if (buttonNum5 == LOW) //if we press on button 1
          {
              pins_array[6] = (pins_array[6] == 0) ? 1 : 0;
-             EEPROM.write(2, pins_array[2]);
+             EEPROM.write(6, pins_array[6]);
              replaceRelay(12,pins_array[6]);
              
          }
           if (buttonNum6 == LOW) //if we press on button 1
          {
              pins_array[7] = (pins_array[7] == 0) ? 1 : 0;
-             EEPROM.write(2, pins_array[2]);
+             EEPROM.write(7, pins_array[7]);
              replaceRelay(13,pins_array[7]);
              
          }
