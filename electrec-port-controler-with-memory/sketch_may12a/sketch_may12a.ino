@@ -139,7 +139,7 @@ void replaceRelay(int port,int value)
         digitalWrite(port, LOW);    
         
     }
-    delay(500);
+    delay(200);
 }
 
 
