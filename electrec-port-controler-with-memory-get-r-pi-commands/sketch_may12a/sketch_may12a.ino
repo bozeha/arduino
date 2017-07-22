@@ -77,7 +77,7 @@ void loop()//start loop
   {
     command = Serial.readString();   // get command from r pi      
   }      
-          if ((buttonNum1 == LOW)||(command == "last")) //if we press on button 1
+          if ((buttonNum1 == LOW)||(command == "light")) //if we press on button 1
          {
            Serial.println("yyyyyyyyyyy");
           Serial.println("555555555555");
@@ -118,7 +118,7 @@ void loop()//start loop
              replaceRelay(12,pins_array[6]);
              command= "";
          }
-          if ((buttonNum6 == LOW)||(command == "light")) //if we press on button 1
+          if ((buttonNum6 == LOW)||(command == "last")) //if we press on button 1
          {
              pins_array[7] = (pins_array[7] == 0) ? 1 : 0;
              EEPROM.write(7, pins_array[7]);
